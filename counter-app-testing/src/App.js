@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [count, setCount] = React.useState(0)
+  const [count, setCount] = React.useState(0);
+  const [error, setError] = React.useState(false);
 
   const decreaseCount = () => {
 
@@ -19,14 +20,29 @@ function App() {
         <span>
           <button 
             data-test='increase'
-            onClick={() => setCount(count + 1)}>click to increase count
+            onClick={() => {
+              if (error) { setError(false); }
+              setCount(count + 1)
+              }
+            }
+            >
+              click to increase count
           </button>
         </span>
         &nbsp;
         <span>
           <button 
             data-test='decrease'
-            onClick={() => setCount(count - 1)}>click to decrease count
+            onClick={() => {
+              if(count > 0){
+                setCount(count - 1);
+              }else {
+                setError(true);
+                }
+              }
+            }
+            >
+              click to decrease count
           </button>
         </span>
       </div>
@@ -35,6 +51,9 @@ function App() {
         <h2 data-test='counter-display'>
           The current count is <span data-test='count'>{count}</span>
         </h2>
+      </div>
+      <div className={`error ${error ? '' : 'hidden'}`}>
+        The counter can not go below 0
       </div>
     </div>
   );
