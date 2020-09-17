@@ -52,7 +52,7 @@ function App() {
           The current count is <span data-test='count'>{count}</span>
         </h2>
       </div>
-      <div className={`error ${error ? '' : 'hidden'}`}>
+      <div data-test='error-display' className={`error ${error ? '' : 'hidden'}`}>
         The counter can not go below 0
       </div>
     </div>
